@@ -1,3 +1,8 @@
 export default function Home() {
-  return <h1 className="text-center bg-black text-white py-4">Hello Mezo</h1>;
+  return (
+    <>
+      <h1 className="text-center bg-black text-white py-4">Hello Mezo</h1>
+      <button className="btn btn-primary">Click Me</button>
+    </>
+  );
 }
