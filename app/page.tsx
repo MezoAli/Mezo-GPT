@@ -1,4 +1,5 @@
 import Link from "next/link";
+// import { UserButton } from "@clerk/nextjs";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
           <Link href="/chat" className="btn btn-secondary">
             Get Started
           </Link>
+          {/* <UserButton /> */}
         </div>
       </div>
     </div>
