@@ -1,6 +1,12 @@
-import { ClerkProvider } from "@clerk/nextjs";
+"use client";
+import { Toaster } from "react-hot-toast";
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  return <ClerkProvider>{children}</ClerkProvider>;
+  return (
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
+      {children}
+    </>
+  );
 };
 
 export default Providers;
