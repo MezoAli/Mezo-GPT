@@ -2,12 +2,13 @@
 
 import { generateChatResponse } from "@/utils/actions";
 import { useMutation } from "@tanstack/react-query";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const Chat = () => {
-  const [text, setText] = useState("");
+  // const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { mutate, isPending } = useMutation({
     mutationFn: (textMsg) =>
@@ -23,11 +24,19 @@ const Chat = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const query = { role: "user", content: text };
+    const query = { role: "user", content: inputRef?.current?.value };
     mutate(query as any);
     setMessages((prev: any) => [...prev, query] as any);
-    setText("");
+    if (inputRef?.current) {
+      inputRef.current.value = "";
+    }
   };
+
+  useEffect(() => {
+    if (inputRef?.current) {
+      inputRef?.current?.focus();
+    }
+  }, []);
 
   return (
     <div className="grid grid-rows-[1fr,auto] min-h-[calc(100vh-6rem)]">
@@ -52,17 +61,19 @@ const Chat = () => {
         <div className="join w-full">
           <input
             type="text"
+            ref={inputRef}
+            required
             placeholder="Message MezoGPT"
             className="join-item input input-bordered w-full"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            // value={text}
+            // onChange={(e) => setText(e.target.value)}
           />
           <button
             type="submit"
             className="btn btn-primary join-item"
             disabled={isPending}
           >
-            {isPending ? "Please Wait..." : "Submit"}
+            {isPending ? "Please Wait..." : "Ask Question"}
           </button>
         </div>
       </form>
