@@ -56,7 +56,14 @@ export const generateTourResponse = async ({ city, country }: Destination) => {
       model: "gpt-3.5-turbo",
       temperature: 0,
     });
-    console.log(response.choices[0].message);
+
+    const tourData = JSON.parse(response.choices[0].message.content!);
+
+    if (!tourData) {
+      return null;
+    }
+
+    return tourData.tour;
   } catch (error) {
     return null;
   }

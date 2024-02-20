@@ -4,6 +4,7 @@ import { Destination, generateTourResponse } from "@/utils/actions";
 import { useMutation } from "@tanstack/react-query";
 import { FormEvent } from "react";
 import toast from "react-hot-toast";
+import TourInfo from "./TourInfo";
 
 const NewTour = () => {
   const {
@@ -11,16 +12,16 @@ const NewTour = () => {
     isPending,
     data: tour,
   } = useMutation({
-    mutationFn: async (destination: any) => {
+    mutationFn: async (destination: Destination) => {
       const newTour = await generateTourResponse(destination);
       if (newTour) {
-        toast.success("gey data");
         return newTour;
       }
       toast.error("Something went wrong!!!");
       return null;
     },
   });
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -53,7 +54,7 @@ const NewTour = () => {
           </div>
         </form>
       </div>
-      <div className="mt-16">Tour Info</div>
+      <div className="mt-16">{tour ? <TourInfo tour={tour} /> : null}</div>
     </>
   );
 };
