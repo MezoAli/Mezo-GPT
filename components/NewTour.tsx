@@ -54,7 +54,13 @@ const NewTour = () => {
           </div>
         </form>
       </div>
-      <div className="mt-16">{tour ? <TourInfo tour={tour} /> : null}</div>
+      <div className="mt-16">
+        {tour ? (
+          <TourInfo tour={tour} />
+        ) : isPending ? (
+          <span className="loading text-2xl"></span>
+        ) : null}
+      </div>
     </>
   );
 };

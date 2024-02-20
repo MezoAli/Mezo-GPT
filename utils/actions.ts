@@ -50,7 +50,7 @@ export const generateTourResponse = async ({ city, country }: Destination) => {
 
     const response = await openai.chat.completions.create({
       messages: [
-        { role: "assistant", content: "you are a helpful tour guide" },
+        { role: "system", content: "you are a helpful tour guide" },
         { role: "user", content: query },
       ],
       model: "gpt-3.5-turbo",
