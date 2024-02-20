@@ -1,12 +1,31 @@
 "use client";
 
+import { Destination, generateTourResponse } from "@/utils/actions";
+import { useMutation } from "@tanstack/react-query";
 import { FormEvent } from "react";
+import toast from "react-hot-toast";
 
 const NewTour = () => {
+  const {
+    mutate,
+    isPending,
+    data: tour,
+  } = useMutation({
+    mutationFn: async (destination: any) => {
+      const newTour = await generateTourResponse(destination);
+      if (newTour) {
+        toast.success("gey data");
+        return newTour;
+      }
+      toast.error("Something went wrong!!!");
+      return null;
+    },
+  });
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(Object.fromEntries(formData.entries()));
+    const destination = Object.fromEntries(formData.entries()) as Destination;
+    mutate(destination);
   };
   return (
     <>
@@ -28,7 +47,9 @@ const NewTour = () => {
               name="country"
               required
             />
-            <button className="btn btn-primary">Submit</button>
+            <button className="btn btn-primary" disabled={isPending}>
+              {isPending ? "Please Wait..." : "generate"}
+            </button>
           </div>
         </form>
       </div>
