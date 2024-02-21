@@ -88,7 +88,7 @@ export const generateTourResponse = async ({ city, country }: Destination) => {
   }
 };
 
-export const createNewTourToDatabase = async (tour: Tour) => {
+export const createNewTourToDatabase = async (tour: any) => {
   try {
     const newTour = await prisma.tour.create({
       data: {
