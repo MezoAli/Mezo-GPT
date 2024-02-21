@@ -6,12 +6,13 @@ import {
   createNewTourToDatabase,
   getExistingTour,
 } from "@/utils/actions";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FormEvent } from "react";
 import toast from "react-hot-toast";
 import TourInfo from "./TourInfo";
 
 const NewTour = () => {
+  const queryClient = useQueryClient();
   const {
     mutate,
     isPending,
@@ -25,6 +26,7 @@ const NewTour = () => {
       const newTour = await generateTourResponse(destination);
       if (newTour) {
         await createNewTourToDatabase(newTour);
+        queryClient.invalidateQueries({ queryKey: ["tours"] });
         return newTour;
       }
       toast.error("Something went wrong!!!");

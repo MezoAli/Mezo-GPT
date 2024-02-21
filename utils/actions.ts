@@ -105,7 +105,7 @@ export const createNewTourToDatabase = async (tour: any) => {
   }
 };
 
-export const getAllTours = async (searchTerm: string) => {
+export const getAllTours = async (searchTerm?: string) => {
   if (!searchTerm) {
     const tours = await prisma.tour.findMany({
       orderBy: {
