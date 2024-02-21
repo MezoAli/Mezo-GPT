@@ -2,7 +2,6 @@
 
 import OpenAI from "openai";
 import prisma from "./db";
-import { Tour } from "@prisma/client";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_SECRET_KEY,
