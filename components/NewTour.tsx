@@ -1,6 +1,11 @@
 "use client";
 
-import { Destination, generateTourResponse } from "@/utils/actions";
+import {
+  Destination,
+  generateTourResponse,
+  createNewTourToDatabase,
+  getExistingTour,
+} from "@/utils/actions";
 import { useMutation } from "@tanstack/react-query";
 import { FormEvent } from "react";
 import toast from "react-hot-toast";
@@ -13,8 +18,13 @@ const NewTour = () => {
     data: tour,
   } = useMutation({
     mutationFn: async (destination: Destination) => {
+      const existingTour = await getExistingTour(destination);
+      if (existingTour) {
+        return existingTour;
+      }
       const newTour = await generateTourResponse(destination);
       if (newTour) {
+        await createNewTourToDatabase(newTour);
         return newTour;
       }
       toast.error("Something went wrong!!!");

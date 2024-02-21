@@ -1,7 +1,6 @@
 import { UserButton, currentUser } from "@clerk/nextjs";
 const UserProfile = async () => {
   const user = await currentUser();
-  console.log(user);
 
   return (
     <div className="flex w-full px-4 justify-between items-center gap-2">
