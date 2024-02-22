@@ -140,3 +140,13 @@ export const getAllTours = async (searchTerm?: string) => {
 
   return tours;
 };
+
+export const getSingleTour = async (id: string) => {
+  const tour = await prisma.tour.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  return tour;
+};
