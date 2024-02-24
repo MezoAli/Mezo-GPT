@@ -1,8 +1,9 @@
 import TourInfo from "@/components/TourInfo";
-import { generateTourImage, getSingleTour } from "@/utils/actions";
+import { getSingleTour } from "@/utils/actions";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+const url = `https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_API_KEY}&query=`;
 
 const SingleTourPage = async ({ params }: { params: { tourId: string } }) => {
   const tour = await getSingleTour(params.tourId);
@@ -11,10 +12,9 @@ const SingleTourPage = async ({ params }: { params: { tourId: string } }) => {
     notFound();
   }
 
-  const tourImage = await generateTourImage({
-    city: tour?.city,
-    country: tour?.country,
-  });
+  const response = await fetch(`${url}${tour.city}`);
+  const data = await response.json();
+  const tourImage = data?.results[0]?.urls?.raw;
 
   return (
     <div className="max-w-2xl">
@@ -25,7 +25,7 @@ const SingleTourPage = async ({ params }: { params: { tourId: string } }) => {
         <Image
           alt={tour.title}
           src={tourImage as string}
-          className="rounded-xl object-cover h-96 w-96"
+          className="rounded-xl object-cover h-96 w-96 mb-16"
           width={300}
           height={300}
         />

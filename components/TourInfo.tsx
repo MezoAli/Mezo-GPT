@@ -1,11 +1,3 @@
-type TourInfo = {
-  title: string;
-  description: string;
-  stops: any;
-  city: string;
-  country: string;
-};
-
 const TourInfo = async ({ tour }: any) => {
   const { title, description, stops } = tour;
   return (
