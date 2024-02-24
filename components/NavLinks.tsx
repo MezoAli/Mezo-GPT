@@ -14,7 +14,7 @@ const NavLinks = () => {
   return (
     <ul className="menu text-base-content gap-4">
       {LINKS.map((link) => {
-        const active = pathname === link.path || pathname.includes(link.path);
+        const active = pathname === link.path;
         return (
           <li key={link.name}>
             <Link
