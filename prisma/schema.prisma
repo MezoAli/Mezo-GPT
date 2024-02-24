@@ -22,3 +22,8 @@ model Tour {
   stops Json
   @@unique([city,country])
 }
+
+model Tokens {
+  clerkId String @id
+  tokens Int @default(2000)
+}

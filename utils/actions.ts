@@ -2,6 +2,7 @@
 
 import OpenAI from "openai";
 import prisma from "./db";
+import { revalidatePath } from "next/cache";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_SECRET_KEY,
@@ -162,6 +163,67 @@ export const generateTourImage = async (destination: Destination) => {
 
     console.log(result);
     return result.data[0].url;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const fetchUserTokensById = async (clerkId: string) => {
+  try {
+    const result = await prisma.tokens.findUnique({
+      where: {
+        clerkId,
+      },
+    });
+
+    return result?.tokens;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const generateUserTokensForId = async (clerkId: string) => {
+  try {
+    const result = await prisma.tokens.create({
+      data: {
+        clerkId,
+      },
+    });
+
+    return result?.tokens;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const fetchOrgenerateTokens = async (clerkId: string) => {
+  try {
+    const user = await fetchUserTokensById(clerkId);
+    if (user) {
+      return user;
+    }
+    const newUser = await generateUserTokensForId(clerkId);
+    return newUser;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const subtractTokens = async (clerkId: string, tokens: number) => {
+  try {
+    const results = await prisma.tokens.update({
+      where: {
+        clerkId,
+      },
+      data: {
+        tokens: {
+          decrement: tokens,
+        },
+      },
+    });
+
+    revalidatePath("/profile");
+    return results.tokens;
   } catch (error) {
     return null;
   }
