@@ -1,25 +1,56 @@
 "use client";
 
-import { generateChatResponse } from "@/utils/actions";
+import {
+  fetchUserTokensById,
+  generateChatResponse,
+  subtractTokens,
+} from "@/utils/actions";
+import { useAuth } from "@clerk/nextjs";
 import { useMutation } from "@tanstack/react-query";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const Chat = () => {
-  // const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { userId } = useAuth();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (textMsg) =>
-      generateChatResponse([...messages, textMsg] as any),
-    onSuccess: (data) => {
-      if (!data) {
+  const { mutate, isPending, data } = useMutation({
+    mutationFn: async (textMsg) => {
+      if (!userId) return;
+      const userTokens = await fetchUserTokensById(userId);
+      if (!userTokens) return;
+
+      if (userTokens < 100) {
+        toast.error("incuffient tokens balance..");
+        return;
+      }
+      const response = await generateChatResponse([
+        ...messages,
+        textMsg,
+      ] as any);
+
+      if (!response) {
         toast.error("something went wrong!!");
         return;
       }
-      setMessages((prev: any) => [...prev, data] as any);
+
+      setMessages((prev: any) => [...prev, response.message] as any);
+
+      const newTokens = await subtractTokens(
+        userId,
+        response.tokensUsed as number
+      );
+
+      toast.success(`${newTokens} tokens are remaining`);
     },
+    // onSuccess: (data) => {
+    //   if (!data) {
+    //     toast.error("something went wrong!!");
+    //     return;
+    //   }
+    //   setMessages((prev: any) => [...prev, data] as any);
+    // },
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
