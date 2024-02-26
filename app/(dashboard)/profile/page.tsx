@@ -1,5 +1,11 @@
 import { fetchOrgenerateTokens } from "@/utils/actions";
 import { UserProfile, auth } from "@clerk/nextjs";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mezo-GPT | Profile Page",
+  description: "profile page where you can edit your profile",
+};
 
 const ProfilePage = async () => {
   const { userId } = auth();
