@@ -7,7 +7,7 @@ import {
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mezo-GPT | Chat Page",
+  title: "Chat Page",
   description: "chat app like Chat-gpt",
 };
 

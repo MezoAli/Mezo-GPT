@@ -3,26 +3,31 @@ import { getSingleTour } from "@/utils/actions";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 const url = `https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_API_KEY}&query=`;
+
+const getTour = cache(getSingleTour);
 
 export const generateMetadata = async ({
   params,
 }: {
   params: { tourId: string };
 }) => {
-  const tour = await getSingleTour(params.tourId);
+  const tour = await getTour(params.tourId);
   if (!tour) {
     notFound();
   }
 
   return {
-    title: tour?.title,
+    title: {
+      absolute: tour?.title,
+    },
     description: tour?.description,
   };
 };
 
 const SingleTourPage = async ({ params }: { params: { tourId: string } }) => {
-  const tour = await getSingleTour(params.tourId);
+  const tour = await getTour(params.tourId);
 
   if (!tour) {
     notFound();

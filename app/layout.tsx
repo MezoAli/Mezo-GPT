@@ -7,7 +7,10 @@ import Providers from "@/components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Mezo-GPT",
+  title: {
+    template: "%s | Mezo-GPT",
+    default: "Mezo-GPT",
+  },
   description:
     "chat app like Chat-gpt and tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
 };

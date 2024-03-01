@@ -7,7 +7,7 @@ import {
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mezo-GPT | New Tour Page",
+  title: "New Tour Page",
   description:
     "tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
 };

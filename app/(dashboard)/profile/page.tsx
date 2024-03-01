@@ -3,7 +3,7 @@ import { UserProfile, auth } from "@clerk/nextjs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mezo-GPT | Profile Page",
+  title: "Profile Page",
   description: "profile page where you can edit your profile",
 };
 
