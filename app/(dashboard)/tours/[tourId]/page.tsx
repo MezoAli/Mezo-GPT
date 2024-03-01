@@ -24,7 +24,7 @@ export const generateMetadata = async ({
     },
     description: tour?.description,
     openGraph: {
-      title: "Mezo-GPT",
+      title: tour?.title,
       siteName: "Mezo-GPT",
       locale: "en-US",
       type: "website",
@@ -36,8 +36,7 @@ export const generateMetadata = async ({
           height: 600,
         },
       ],
-      description:
-        "chat app like Chat-gpt and tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
+      description: tour?.description,
     },
   };
 };

@@ -10,7 +10,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Tours Page",
   openGraph: {
-    title: "Mezo-GPT",
+    title: "Tours Page",
     siteName: "Mezo-GPT",
     locale: "en-US",
     type: "website",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
       },
     ],
     description:
-      "chat app like Chat-gpt and tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
+      "tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
   },
   description:
     "tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
