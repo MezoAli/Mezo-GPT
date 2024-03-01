@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: `${process.env.SITE_URL}/new-tour`,
     images: [
       {
-        url: `${process.env.SITE_URL}/opengraph-imageConfigDefault.png`,
+        url: `${process.env.SITE_URL}/opengraph-image.png`,
         width: 600,
         height: 600,
       },

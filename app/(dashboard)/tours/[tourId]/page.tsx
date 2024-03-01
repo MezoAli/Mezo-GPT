@@ -31,7 +31,7 @@ export const generateMetadata = async ({
       url: `${process.env.SITE_URL}/${params.tourId}`,
       images: [
         {
-          url: `${process.env.SITE_URL}/opengraph-imageConfigDefault.png`,
+          url: `${process.env.SITE_URL}/opengraph-image.png`,
           width: 600,
           height: 600,
         },
