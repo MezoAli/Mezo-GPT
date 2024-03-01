@@ -9,6 +9,22 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Tours Page",
+  openGraph: {
+    title: "Mezo-GPT",
+    siteName: "Mezo-GPT",
+    locale: "en-US",
+    type: "website",
+    url: `${process.env.SITE_URL}/tours`,
+    images: [
+      {
+        url: `${process.env.SITE_URL}/opengraph-imageConfigDefault.png`,
+        width: 600,
+        height: 600,
+      },
+    ],
+    description:
+      "chat app like Chat-gpt and tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
+  },
   description:
     "tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
 };
