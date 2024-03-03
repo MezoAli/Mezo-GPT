@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     url: `${process.env.SITE_URL}/chat`,
     images: [
       {
-        url: `${process.env.SITE_URL}/opengraph-image.png`,
+        url: `${process.env.SITE_URL}/chat/opengraph-image.png`,
         width: 600,
         height: 600,
       },
