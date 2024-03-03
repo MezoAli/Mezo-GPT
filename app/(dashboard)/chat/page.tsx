@@ -18,11 +18,14 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${process.env.SITE_URL}/chat/opengraph-image.png`,
-        width: 600,
-        height: 600,
+        width: 1200,
+        height: 630,
       },
     ],
     description: "chat app like Chat-gpt",
+  },
+  alternates: {
+    canonical: `${process.env.SITE_URL}/chat`,
   },
 };
 

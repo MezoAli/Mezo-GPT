@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     template: "%s | Mezo-GPT",
     default: "Mezo-GPT",
   },
+  alternates: {
+    canonical: `${process.env.SITE_URL}`,
+  },
   openGraph: {
     title: "Mezo-GPT",
     siteName: "Mezo-GPT",
@@ -20,8 +23,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${process.env.SITE_URL}/opengraph-image.png`,
-        width: 600,
-        height: 600,
+        width: 1200,
+        height: 630,
       },
     ],
     description:

@@ -38,6 +38,9 @@ export const generateMetadata = async ({
       ],
       description: tour?.description,
     },
+    alternates: {
+      canonical: `${process.env.SITE_URL}/${params.tourId}`,
+    },
   };
 };
 

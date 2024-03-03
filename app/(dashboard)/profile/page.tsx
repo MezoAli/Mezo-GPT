@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     ],
     description: "profile page where you can edit your profile",
   },
+  alternates: {
+    canonical: `${process.env.SITE_URL}/profile`,
+  },
 };
 
 const ProfilePage = async () => {

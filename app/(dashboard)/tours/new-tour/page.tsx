@@ -8,6 +8,9 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "New Tour Page",
+  alternates: {
+    canonical: `${process.env.SITE_URL}/new-tour`,
+  },
   openGraph: {
     title: "New Tour Page",
     siteName: "Mezo-GPT",

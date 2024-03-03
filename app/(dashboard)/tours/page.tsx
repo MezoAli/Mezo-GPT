@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     description:
       "tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
   },
+  alternates: {
+    canonical: `${process.env.SITE_URL}/tours`,
+  },
   description:
     "tour gide generator to specify where you need to go and let us decide the beautiful places to visit",
 };
