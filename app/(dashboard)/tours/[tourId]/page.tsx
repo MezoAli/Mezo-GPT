@@ -55,22 +55,38 @@ const SingleTourPage = async ({ params }: { params: { tourId: string } }) => {
   const data = await response.json();
   const tourImage = data?.results[0]?.urls?.raw;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    name: tour.title,
+    image: tourImage,
+    description: tour.description,
+  };
+
   return (
-    <div className="max-w-2xl">
-      <Link href="/tours" className="btn btn-primary mb-8">
-        Back to tours
-      </Link>
-      {tourImage ? (
-        <Image
-          alt={tour.title}
-          src={tourImage as string}
-          className="rounded-xl object-cover h-96 w-96 mb-16"
-          width={300}
-          height={300}
+    <>
+      <section>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      ) : null}
-      <TourInfo tour={tour} />
-    </div>
+      </section>
+      <div className="max-w-2xl">
+        <Link href="/tours" className="btn btn-primary mb-8">
+          Back to tours
+        </Link>
+        {tourImage ? (
+          <Image
+            alt={tour.title}
+            src={tourImage as string}
+            className="rounded-xl object-cover h-96 w-96 mb-16"
+            width={300}
+            height={300}
+          />
+        ) : null}
+        <TourInfo tour={tour} />
+      </div>
+    </>
   );
 };
 
